@@ -44,7 +44,7 @@ namespace Real_State_Catalog.Controllers
             string path = this.Request.Scheme + "://" + this.Request.Host.Value + "/api/advancedsearch/" + city + "/" + arrivalDate + "/" + departureDate + "/" + nbPerson;
             Debug.WriteLine("Search API path: " + path);
 
-            IEnumerable<Offer> offers = null;
+            IEnumerable<Offer>? offers = null;
 
             HttpResponseMessage response = await client.GetAsync(path);
 
