@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Real_State_Catalog.Data;
+﻿using Real_State_Catalog.Data;
 using Real_State_Catalog.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Diagnostics;
-
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
 namespace Real_State_Catalog.Controllers
 {
     public class HomeController : Controller
@@ -35,6 +39,26 @@ namespace Real_State_Catalog.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        public async Task<IActionResult> Search(string city, string arrivalDate, string departureDate, string nbPerson)
+        {
+            HttpClient client = new();
+
+            string path = this.Request.Scheme + "://" + this.Request.Host.Value + "/api/search/" + city + "/" + arrivalDate + "/" + departureDate + "/" + nbPerson;
+            Debug.WriteLine("Search API path: " + path);
+
+            IEnumerable<Offer>? offers = null;
+
+            HttpResponseMessage response = await client.GetAsync(path);
+
+            if (response.IsSuccessStatusCode)
+            { 
+                offers = JsonConvert.DeserializeObject<IEnumerable<Offer>>(await response.Content.ReadAsStringAsync());
+
+                ViewBag.Search = true;
+            }
+
+            return View("Index", offers);
         }
     }
 }
