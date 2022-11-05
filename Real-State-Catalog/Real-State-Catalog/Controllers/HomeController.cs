@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Real_State_Catalog.Data;
+using Real_State_Catalog.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using Real_State_Catalog.Data;
-using Real_State_Catalog.Models;
+using System.Collections.Generic;
 using System.Diagnostics;
-
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
 namespace Real_State_Catalog.Controllers
 {
     public class HomeController : Controller
@@ -41,7 +44,7 @@ namespace Real_State_Catalog.Controllers
         {
             HttpClient client = new();
 
-            string path = this.Request.Scheme + "://" + this.Request.Host.Value + "/api/advancedsearch/" + city + "/" + arrivalDate + "/" + departureDate + "/" + nbPerson;
+            string path = this.Request.Scheme + "://" + this.Request.Host.Value + "/api/search/" + city + "/" + arrivalDate + "/" + departureDate + "/" + nbPerson;
             Debug.WriteLine("Search API path: " + path);
 
             IEnumerable<Offer>? offers = null;
@@ -49,7 +52,7 @@ namespace Real_State_Catalog.Controllers
             HttpResponseMessage response = await client.GetAsync(path);
 
             if (response.IsSuccessStatusCode)
-            {
+            { 
                 offers = JsonConvert.DeserializeObject<IEnumerable<Offer>>(await response.Content.ReadAsStringAsync());
 
                 ViewBag.Search = true;

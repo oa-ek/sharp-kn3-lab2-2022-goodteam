@@ -22,7 +22,7 @@ namespace Real_State_Catalog.API
             [HttpGet("{city}/{arrivalDate}/{departureDate}/{nbPerson}")]
             public async Task<IEnumerable<Offer>> Get(string city, string arrivalDate, string departureDate, string nbPerson)
             {
-                IEnumerable<Offer> offers = null;
+                IEnumerable<Offer>? offers = null;
 
                 DateTime arrivalDateTime = DateTime.ParseExact(arrivalDate, "yyyy-MM-dd", null);
                 DateTime departureDateTime = DateTime.ParseExact(departureDate, "yyyy-MM-dd", null);
@@ -34,7 +34,7 @@ namespace Real_State_Catalog.API
                         .Where(o => o.StartAvailability <= arrivalDateTime && o.EndAvailability > arrivalDateTime && o.EndAvailability >= departureDateTime)
                         .Where(o => o.Accommodation.Address.City == city && o.Accommodation.MaxTraveler >= nbPersonInt)
                         //.Include(o => o.Accommodation.Pictures)
-                        //.Include(o => o.Accommodation.Address)
+                        //Include(o => o.Accommodation.Address)
                         .Select(o => new Offer
                         {
                             Id = o.Id,
