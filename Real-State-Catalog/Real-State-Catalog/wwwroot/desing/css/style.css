@@ -9682,8 +9682,8 @@ textarea {
       top: 0;
       z-index: 1; }
   .hero, .hero > .container > .row {
-    height: 100vh;
-    min-height: 574px; }
+    height: 80vh;
+    min-height: 455px; }
   .hero.page-inner, .hero.page-inner > .container > .row {
     height: 70vh;
     min-height: 300px; }
