@@ -69,13 +69,17 @@
 <div class="album py-5 bg-light">
     <div class="container">
 
-        @if (ViewBag.Search == null)
+       @if (ViewBag.Search == null && ViewBag.Filter==null)
         {
             <h2>Last published offers</h2>
         }
-        else
+        else if(ViewBag.Search != null)
         {
             <h2>Offers corresponding to your search</h2>
+        }
+        else if(ViewBag.Filter != null)
+        {
+            <h2>Offers corresponding to your filter</h2>
         }
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" style="margin-top: 1em;">

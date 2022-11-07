@@ -60,5 +60,26 @@ namespace Real_State_Catalog.Controllers
 
             return View("Index", offers);
         }
+
+        public async Task<IActionResult> Filter(string city, string Type, string nbPerson, string PricePerNight)
+        {
+            HttpClient client = new();
+
+            string path = this.Request.Scheme + "://" + this.Request.Host.Value + "/api/filter/" + city + "/" + Type + "/" + nbPerson + "/" + PricePerNight;
+            Debug.WriteLine("Search API path: " + path);
+
+            IEnumerable<Offer>? offers = null;
+
+            HttpResponseMessage response = await client.GetAsync(path);
+
+            if (response.IsSuccessStatusCode)
+            {
+                offers = JsonConvert.DeserializeObject<IEnumerable<Offer>>(await response.Content.ReadAsStringAsync());
+
+                ViewBag.Filter = true;
+            }
+
+            return View("Index", offers);
+        }
     }
 }
