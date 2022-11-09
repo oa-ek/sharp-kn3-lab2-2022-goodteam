@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_NewLayout.cshtml";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";   
 }
 
 <div style="padding-top: 0.5em">
@@ -159,7 +159,6 @@
                             <h6 style="display:inline;">Smoking accommodation : @(Model.Accommodation.HouseRules.SmokeAllowed ? "Yes" : "Non")</h6>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="col-sm-4">
@@ -239,6 +238,50 @@
                     </div>
                 </div>
             </div>
+                <!--Communication with manager-->
+                    <!-- ======= Contact Single ======= -->
+                    <section class="contact">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-sm-12 section-t8">
+                            <div class="row">
+                              <div class="col-md-7">
+                                  <hr class="solid">
+                                  <div> <h4>Send your message</h4></div>
+                               <form action="mailto:" method="post" enctype="text/plain">
+                                  <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                      <div class="form-group">
+                                        <input type="text" name="name" class="form-control form-control-lg form-control-a" placeholder="Your Name" required>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                      <div class="form-group">
+                                        <input name="email" type="email" class="form-control form-control-lg form-control-a" placeholder="Your Email" required>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                      <div class="form-group">
+                                        <input type="text" name="subject" class="form-control form-control-lg form-control-a" placeholder="Subject" required>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                      <div class="form-group">
+                                        <textarea name="message" class="form-control" name="message" cols="45" rows="8" placeholder="Message" required></textarea>
+                                      </div>
+                                    </div>                                  
+                                    <div class="col-md-12 text-center">
+                                      <button type="submit" class="btn btn-a">Send Message</button>
+                                    </div>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section><!-- End Contact Single-->
+
         </div>
     </div>
 </div>

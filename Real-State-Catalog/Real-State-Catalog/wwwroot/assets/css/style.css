@@ -273,7 +273,7 @@ a:hover {
 
 /*------/ Space Padding /------*/
 .section-t8 {
-  padding-top: 8rem;
+  /*padding-top: 5rem;*/
 }
 
 @media (max-width: 767px) {
@@ -482,8 +482,8 @@ a:hover {
   position: fixed;
   visibility: hidden;
   opacity: 0;
-  right: 15px;
-  bottom: 15px;
+  right: 18px;
+  bottom: 85px;
   z-index: 996;
   background: #2eca6a;
   width: 40px;
