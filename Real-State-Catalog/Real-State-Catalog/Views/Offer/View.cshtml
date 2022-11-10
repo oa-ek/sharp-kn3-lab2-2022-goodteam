@@ -159,6 +159,8 @@
                             <h6 style="display:inline;">Smoking accommodation : @(Model.Accommodation.HouseRules.SmokeAllowed ? "Yes" : "Non")</h6>
                         </div>
                     </div>
+
+
                 </div>
 
                 <div class="col-sm-4">
@@ -232,56 +234,149 @@
                                 <div class="d-grid gap-2">
                                     <button class="btn btn-success" type="submit">To book</button>
                                 </div>
-
                             </form>
+                           </div>
                         </div>
                     </div>
-                </div>
-            </div>
-                <!--Communication with manager-->
-                    <!-- ======= Contact Single ======= -->
-                    <section class="contact">
-                      <div class="container">
-                        <div class="row">
-                          <div class="col-sm-12 section-t8">
-                            <div class="row">
-                              <div class="col-md-7">
-                                  <hr class="solid">
-                                  <div> <h4>Send your message</h4></div>
-                               <form action="mailto:" method="post" enctype="text/plain">
-                                  <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                      <div class="form-group">
-                                        <input type="text" name="name" class="form-control form-control-lg form-control-a" placeholder="Your Name" required>
-                                      </div>
+                     <!--Map-->
+                              <hr class="solid" style="margin-top:25px;">
+                              <h5>Location</h5>            
+                              <div class="map">
+                                <div id="MapLocation" style="height: 300px">
+                                   <div class="input-group" style="position: absolute; z-index: 1000; bottom: 20px; right: 170px; width: 150px; opacity: 0.8"> 
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text" style="border-radius:0px; line-height: 2.4;">Lat</div>
+                                            </div>
+                                            <input asp-for="@Model.Accommodation.LatitudeRaw"  class="form-control" type="text" readonly="" value="@Model.Accommodation.Latitude" id="LatitudeRaw" name="LatitudeRaw">
+                                        </div>
+                                        </div>
+                                        <div class="input-group" style="position: absolute; z-index: 1000; bottom: 20px; right: 10px; width: 150px; opacity: 0.8">
+                                             <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text" style="border-radius:0px; line-height: 2.4;">Lng</div>
+                                            </div>
+                                             <input asp-for="@Model.Accommodation.LongitudeRaw" readonly=""  class="form-control" type="text" readonly="" value="@Model.Accommodation.Longitude" id="LongitudeRaw" name="LongitudeRaw">
+                                        </div>                   
                                     </div>
-                                    <div class="col-md-6 mb-3">
-                                      <div class="form-group">
-                                        <input name="email" type="email" class="form-control form-control-lg form-control-a" placeholder="Your Email" required>
-                                      </div>
-                                    </div>
-                                    <div class="col-md-12 mb-3">
-                                      <div class="form-group">
-                                        <input type="text" name="subject" class="form-control form-control-lg form-control-a" placeholder="Subject" required>
-                                      </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                      <div class="form-group">
-                                        <textarea name="message" class="form-control" name="message" cols="45" rows="8" placeholder="Message" required></textarea>
-                                      </div>
-                                    </div>                                  
-                                    <div class="col-md-12 text-center">
-                                      <button type="submit" class="btn btn-a">Send Message</button>
-                                    </div>
-                                  </div>
-                                </form>
+                                </div>
                               </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </section><!-- End Contact Single-->
+                            <!--End of map-->
+                                <!--Communication with manager-->
+                                    <!-- ======= Contact Single ======= -->
+                                    <hr class="solid" style="margin-top:25px;">
+                                    <section class="contact">
+                                      <div class="container">
+                                        <div class="row">
+                                          <div class="col-sm-12 section-t8">
+                                            <div class="row">
+                                              <div class="col-md-7">
+                                                  <div> <h4>Send your message</h4></div>
+                                               <form action="mailto:" method="post" enctype="text/plain">
+                                                  <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                      <div class="form-group">
+                                                        <input type="text" name="name" class="form-control form-control-lg form-control-a" placeholder="Your Name" required>
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                      <div class="form-group">
+                                                        <input name="email" type="email" class="form-control form-control-lg form-control-a" placeholder="Your Email" required>
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-md-12 mb-3">
+                                                      <div class="form-group">
+                                                        <input type="text" name="subject" class="form-control form-control-lg form-control-a" placeholder="Subject" required>
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                      <div class="form-group">
+                                                        <textarea name="message" class="form-control" name="message" cols="45" rows="8" placeholder="Message" required></textarea>
+                                                      </div>
+                                                    </div>                                  
+                                                    <div class="col-md-12 text-center">
+                                                      <button type="submit" class="btn btn-a">Send Message</button>
+                                                    </div>
+                                                  </div>
+                                                </form>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </section><!-- End Contact Single-->
+                </div>
+            </div>     
 
         </div>
     </div>
 </div>
+<style>
+.map { 
+    width: 100%;
+    border: 3px solid #red;
+    height: 300px;
+}
+</style>
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/leaflet/leaflet.min.js"></script>
+    <link href="~/leaflet/leaflet.min.css" rel="stylesheet" />
+    <script>
+       /* $(function() {
+
+            var map = L.map('map').setView([48, 31], 15);
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 7,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+            var marker = L.marker([48, 31]).addTo(map);            
+
+        });*/
+
+
+
+        $(function() {
+
+          var latr = document.getElementById('LatitudeRaw').value;
+          var logr = document.getElementById('LongitudeRaw').value;
+          var lat=latr.replace(",", ".");
+          var log=logr.replace(",", ".");
+          var curLocation = [lat,log];
+
+          if (curLocation[0] == 0 && curLocation[1] == 0) {
+            curLocation = [48, 31];
+          }
+
+          var map = L.map('MapLocation').setView(curLocation, 10);
+
+          L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+              maxZoom: 15,
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          }).addTo(map);
+
+          map.attributionControl.setPrefix(false);
+
+          var marker = new L.marker(curLocation);
+
+          marker.on('dragend', function(event) {
+            var position = marker.getLatLng();
+            marker.setLatLng(position, {
+            }).bindPopup(position).update();
+            $("#LatitudeRaw").val(position.lat);
+            $("#LongitudeRaw").val(position.lng).keyup();
+          });
+
+          $("#LatitudeRaw, #LongitudeRaw").change(function() {
+            var position = [parseInt($("#LatitudeRaw").val()), parseInt($("#LongitudeRaw").val())];
+            marker.setLatLng(position, {
+            }).bindPopup(position).update();
+            map.panTo(position);
+          });
+
+          map.addLayer(marker);
+        })
+       
+    </script>
+}

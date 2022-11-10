@@ -77,11 +77,14 @@ namespace Real_State_Catalog.Controllers
             [HttpPost]
             [ValidateAntiForgeryToken]
             public async Task<IActionResult> Create(
-                [Bind("Name, Type, MaxTraveler, Description")] Accommodation accommodation,
+                [Bind("Name, Type, MaxTraveler, Description, LatitudeRaw, LongitudeRaw")] Accommodation accommodation,
                 [Bind("StreetAndNumber, Complement, City, PostalCode, Country")] Address address,
                 [Bind("ArrivalHour, DepartureHour, PetAllowed, PartyAllowed, SmokeAllowed")] HouseRules houseRules)
             {
-                if (!ModelState.IsValid) { return View(accommodation); }
+                if (!ModelState.IsValid) 
+            { return View(accommodation); }
+                accommodation.Latitude=double.Parse(accommodation.LatitudeRaw.Replace(".",","));
+                accommodation.Longitude=double.Parse(accommodation.LongitudeRaw.Replace(".", ","));  
 
                 accommodation.UserId = (await _userManager.GetUserAsync(User)).Id;
                 accommodation.Address = address;
@@ -119,7 +122,7 @@ namespace Real_State_Catalog.Controllers
             [HttpPost]
             [ValidateAntiForgeryToken]
             public async Task<IActionResult> Edit(Guid id,
-                [Bind("Id, Name, Type, MaxTraveler, Description")] Accommodation accommodation,
+                [Bind("Id, Name, Type, MaxTraveler, Description,  LatitudeRaw, LongitudeRaw")] Accommodation accommodation,
                 [Bind("Id, StreetAndNumber, Complement, City, PostalCode, Country")] Address address,
                 [Bind("Id, ArrivalHour, DepartureHour, PetAllowed, PartyAllowed, SmokeAllowed")] HouseRules houseRules)
             {
@@ -128,7 +131,11 @@ namespace Real_State_Catalog.Controllers
                     return NotFound();
                 }
 
-                //if (!ModelState.IsValid) { return View(accommodation); }
+                if (!ModelState.IsValid) { return View(accommodation); }
+
+                accommodation.Latitude = double.Parse(accommodation.LatitudeRaw.Replace(".", ","));
+                accommodation.Longitude = double.Parse(accommodation.LongitudeRaw.Replace(".", ","));
+
                 accommodation.UserId = await _context.Accommodations.Where(a => a.Id == id).Select(a => a.UserId).SingleOrDefaultAsync();
                 accommodation.Address = address;
                 accommodation.HouseRules = houseRules;
@@ -183,5 +190,5 @@ namespace Real_State_Catalog.Controllers
             {
                 return _context.Accommodations.Any(e => e.Id == id);
             }
-        }
+    }
 }

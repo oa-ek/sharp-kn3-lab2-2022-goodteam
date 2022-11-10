@@ -169,6 +169,12 @@ namespace Real_State_Catalog.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double?>("Latitude")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("Longitude")
+                        .HasColumnType("float");
+
                     b.Property<int>("MaxTraveler")
                         .HasColumnType("int");
 
@@ -181,7 +187,6 @@ namespace Real_State_Catalog.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -201,7 +206,6 @@ namespace Real_State_Catalog.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Complement")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
@@ -290,7 +294,6 @@ namespace Real_State_Catalog.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("OfferId")
-                        .IsRequired()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("UserId")
@@ -420,11 +423,9 @@ namespace Real_State_Catalog.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -528,9 +529,7 @@ namespace Real_State_Catalog.Migrations
                 {
                     b.HasOne("Real_State_Catalog.Models.User", "User")
                         .WithMany("Accommodations")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
@@ -576,9 +575,7 @@ namespace Real_State_Catalog.Migrations
                 {
                     b.HasOne("Real_State_Catalog.Models.Offer", "Offer")
                         .WithMany()
-                        .HasForeignKey("OfferId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OfferId");
 
                     b.HasOne("Real_State_Catalog.Models.User", null)
                         .WithMany("Bookmarks")
@@ -629,11 +626,9 @@ namespace Real_State_Catalog.Migrations
 
             modelBuilder.Entity("Real_State_Catalog.Models.Accommodation", b =>
                 {
-                    b.Navigation("Address")
-                        .IsRequired();
+                    b.Navigation("Address");
 
-                    b.Navigation("HouseRules")
-                        .IsRequired();
+                    b.Navigation("HouseRules");
 
                     b.Navigation("Offers");
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 
@@ -42,6 +43,12 @@ namespace Real_State_Catalog.Models
         public int MaxTraveler { get; set; }
         [Required(ErrorMessage = "You must enter the description of your accommodation")]
         public string? Description { get; set; }
+        public double? Longitude { get; set; }
+        public double? Latitude { get; set; }
+        [NotMapped]
+        public string? LongitudeRaw { get; set; }
+        [NotMapped]
+        public string? LatitudeRaw { get; set; }
     }
 }
         
