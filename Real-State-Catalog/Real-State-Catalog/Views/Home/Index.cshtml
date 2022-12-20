@@ -37,7 +37,7 @@
                                         <input type="text" class="form-control" name="city" placeholder="Where are you going?" required>
                                     </div>
 
-                                    <div class="col-md-3">
+                                    @*<div class="col-md-3">
                                         <label style="margin: 0.2em;">Arrival</label>
                                         <input type="date" class="form-control" name="arrivalDate" min="@DateTime.Now.ToString("yyyy-MM-dd")" required>
                                     </div>
@@ -45,6 +45,13 @@
                                     <div class="col-md-3">
                                         <label style="margin: 0.2em;">Departure</label>
                                         <input type="date" class="form-control" name="departureDate" min="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                                    </div>*@
+                                    <div class="col-md-3" style="padding-left:25px">
+                                        <label style="margin: 0.2em;">Arrival/Departure</label>
+                                        <input type="text" class="form-control" name="daterange" name="dateAvaliabilty" value="01/01/2015 - 01/31/2015" style="width:350px;padding-left:20px" />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label style="margin: 0.2em;"></label>
                                     </div>
                                     <div class="col-md-2">
                                         <label style="margin: 0.2em;">Travelers</label>

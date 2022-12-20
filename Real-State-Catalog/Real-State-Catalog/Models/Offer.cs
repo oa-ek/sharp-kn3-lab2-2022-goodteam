@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Real_State_Catalog.Models
 {
@@ -28,7 +29,8 @@ namespace Real_State_Catalog.Models
 
 		[Display(Name = "Cleaning fee")]
 		public double CleaningFee { get; set; }
-
+		[NotMapped]
+		public string DateAvailability { get; set; }
 		public Offer()
 		{
 			this.AddingDateTime = DateTime.Now;

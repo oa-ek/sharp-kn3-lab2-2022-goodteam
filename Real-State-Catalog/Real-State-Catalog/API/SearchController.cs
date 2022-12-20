@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Real_State_Catalog.Data;
 using Real_State_Catalog.Models;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Real_State_Catalog.API
 {
@@ -19,9 +20,13 @@ namespace Real_State_Catalog.API
             }
 
             // GET: api/<SearchController>
-            [HttpGet("{city}/{arrivalDate}/{departureDate}/{nbPerson}")]
-            public async Task<IEnumerable<Offer>> Get(string city, string arrivalDate, string departureDate, string nbPerson)
+            [HttpGet("{city}/{dateAvaliabilty}/{nbPerson}")]
+            public async Task<IEnumerable<Offer>> Get(string city, string dateAvaliabilty, string nbPerson)
             {
+                var dates = dateAvaliabilty.Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+
+                var arrivalDate = dates[0];
+                var departureDate = dates[1];
                 IEnumerable<Offer>? offers = null;
 
                 DateTime arrivalDateTime = DateTime.ParseExact(arrivalDate, "yyyy-MM-dd", null);
