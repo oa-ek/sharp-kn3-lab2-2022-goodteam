@@ -221,25 +221,23 @@ namespace Real_State_Catalog.Controllers
 
             return View(offer);
         }
-
-        public async Task<IActionResult> AddBookmark(Guid id)
+        [HttpPost]
+        public async Task AddBookmark(Guid id)
         {
             await new BookmarkController(_context, _userManager.GetUserId(User)).Add(id);
 
             TempData["AlertType"] = "success";
             TempData["AlertMsg"] = "Offer successfully added to favorites ! <a href=\"/Identity/Account/Manage/Bookmark\">Favorits</a>";
 
-            return RedirectToAction("View", new { id });
         }
-
-        public async Task<IActionResult> DeleteBookmark(Guid id)
+        [HttpPost]
+        public async Task DeleteBookmark(Guid id)
         {
             await new BookmarkController(_context, _userManager.GetUserId(User)).Delete(id);
 
             TempData["AlertType"] = "warning";
             TempData["AlertMsg"] = "Deal successfully removed from favorites ! <a href=\"/Identity/Account/Manage/Bookmark\">Favorits</a>";
 
-            return RedirectToAction("View", new { id });
         }
 
         private bool BookmarkExist(Guid offerId, string userId)

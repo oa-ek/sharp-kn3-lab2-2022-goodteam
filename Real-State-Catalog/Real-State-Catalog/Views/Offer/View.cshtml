@@ -63,23 +63,21 @@
                             {
                                 if (!ViewBag.Bookmark)
                                 {
-                                    <form asp-action="AddBookmark" style="display: inline-block;">
-                                        <input type="hidden" asp-for="@Model.Id" />
+                                    
+                                        <input type="hidden" class="hiddenInput" value="@Model.Id" asp-for="@Model.Id" />
 
-                                        <button style="background: none; padding: 0px; border: none;" type="submit">
-                                            <h3><i class="bi bi-bookmark-plus" style="color:black;"></i></h3>
+                                        <button style="background: none; padding: 0px; border: none;" class="addBookmark">
+                                            <h3><i class="bi bi-bookmark-plus" id="addBookmarkIc" style="color:black;"></i></h3>
                                         </button>
-                                    </form>
+                                    
                                 }
                                 else
                                 {
-                                    <form asp-action="DeleteBookmark" style="display: inline-block;">
-                                        <input type="hidden" asp-for="@Model.Id" />
+                                        <input type="hidden" class="hiddenInput"  value="@Model.Id" asp-for="@Model.Id" />
 
-                                        <button style="background: none; padding: 0px; border: none;" type="submit">
-                                            <h3><i class="bi bi-bookmark-x-fill" style="color:black;"></i></h3>
+                                        <button style="background: none; padding: 0px; border: none;" class="deleteBookmark">
+                                            <h3><i class="bi bi-bookmark-x-fill" id="deleteBookmarkIc" style="color:black;"></i></h3>
                                         </button>
-                                    </form>
                                 }
                             }
                         </div>
@@ -264,7 +262,7 @@
                             <!--End of map-->
                                 <!--Communication with manager-->
                                     <!-- ======= Contact Single ======= -->
-                                    <hr class="solid" style="margin-top:25px;">
+                                                        <hr class="solid" style="margin-top:25px;">
                                     <section class="contact">
                                       <div class="container">
                                         <div class="row">
@@ -272,7 +270,7 @@
                                             <div class="row">
                                               <div class="col-md-7">
                                                   <div> <h4>Send your message</h4></div>
-                                               <form action="mailto:" method="post" enctype="text/plain">
+                                               <form action="mailto:admin@gmail.com" method="post" enctype="text/plain">
                                                   <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                       <div class="form-group">
@@ -304,7 +302,8 @@
                                           </div>
                                         </div>
                                       </div>
-                                    </section><!-- End Contact Single-->
+                                    </section>
+                      <!-- End Contact Single-->
                 </div>
             </div>     
 
@@ -379,4 +378,43 @@
         })
        
     </script>
+    <script>
+    $(document).ready(function () {
+        $('.addBookmark').click(function (e) {
+        var ss = jQuery(this).parent().find('.hiddenInput').val();
+        console.log(ss);
+            $.ajax({
+                url: '/Offer/AddBookmark',
+                type: 'Post',
+                data: {
+                    id: ss
+                },
+                success: function() {
+                    $( "#addBookmarkIc" ).removeClass( "bi-bookmark-plus" ).addClass( "bi-bookmark-x-fill" );
+                    }
+             });
+        });
+    });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.deleteBookmark').click(function (e) {
+            var ss = jQuery(this).parent().find('.hiddenInput').val();
+
+                console.log(ss);
+                    $.ajax({
+                        url: '/Offer/DeleteBookmark',
+                        type: 'Post',
+                        data: {
+                            id: ss
+                        },
+                        success: function() {
+                            $( "#deleteBookmarkIc" ).removeClass( "bi-bookmark-x-fill" ).addClass( "bi-bookmark-plus" );
+                            }
+                    });
+                        setTimeout(sayHi, 700);
+                });
+
+        });
+        </script>
 }
